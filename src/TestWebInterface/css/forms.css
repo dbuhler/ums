@@ -1,0 +1,140 @@
+input[type="checkbox"],
+input[type="text"],
+input[type="password"],
+select {
+    display: inline-block;
+    font-size: 0.8em;
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
+input[type="submit"] {
+    background: #0080ff;
+    border: none;
+    border-radius: 8px;
+    color: #ffffff;
+    cursor: pointer;
+    display: block;
+    float: right;
+    font-family: 'Trebuchet MS', Arial, sans-serif;
+    font-size: 0.8em;
+    font-weight: bold;
+    margin: 0;
+    padding: 0.5em 1em;
+}
+
+.buttons {
+    clear: both;
+    float: right;
+    margin: 1em 0 0;
+}
+
+    .buttons input[type="submit"] {
+        display: inline-block;
+        float: none;
+        margin-left: 1em;
+    }
+
+.form {
+    border: 1px solid #cccccc;
+    margin: 1em 2em 1em 0;
+    overflow: auto;
+    padding: 1.5em;
+}
+
+.radio {
+    font-size: 0.8em;
+}
+
+    span.radio {
+        display: block;
+        padding-top: 1px;
+    }
+
+    .radio input {
+        margin: 0.5em 0;
+        position: relative;
+        bottom: 1px;
+    }
+
+    .radio label {
+        margin: 0 1.5em 0 0.5em;
+    }
+
+
+.fields {
+    float: left;
+    margin: 0 0 1em;
+}
+
+    .fields:nth-of-type(2) {
+        float: right;
+    }
+
+    .fields div {
+        position: relative;
+    }
+
+    .fields .col1 {
+        width: 8em;
+    }
+
+    .fields .col2 {
+        width: 10em;
+    }
+
+    .fields span,
+    .fields label {
+        display: inline-block;
+    }
+
+    .fields input[type="checkbox"] {
+        margin: 0.25em 0.75em 0.25em 0;
+    }
+
+    .fields input[type="text"],
+    .fields input[type="password"],
+    .fields select {
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        margin: 0.25em 0;
+        width: 100%;
+    }
+
+#login {
+    width: 14em;
+}
+
+    #login .col1 {
+        width: 6em;
+    }
+
+    #login .col2 {
+        width: 8em;
+    }
+
+#register {
+    width: 18em;
+}
+
+    #register .col1 {
+        width: 10em;
+    }
+
+    #register .col2 {
+        width: 8em;
+    }
+
+.asterisk {
+    color: red;
+    font-size: 1.6em;
+    right: -0.6em;
+    position: absolute;
+    top: 0.2em;
+}
+
+.ui-datepicker {
+    font-size: 0.8em;
+}

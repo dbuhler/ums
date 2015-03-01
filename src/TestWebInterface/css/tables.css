@@ -1,0 +1,49 @@
+﻿table {
+    margin: 1.5em 0;
+}
+
+.record th:nth-child(1),
+.record th:nth-child(2) {
+    width: 10em;
+}
+
+.record th:nth-child(3) {
+    width: 3em;
+}
+
+.record th:nth-child(4) {
+    width: 5em;
+}
+
+tr:nth-child(even) td {
+    background: #dddddd;
+}
+
+    tr:nth-child(even) td:first-child {
+        border-radius: 8px 0 0 8px;
+    }
+
+    tr:nth-child(even) td:last-child {
+        border-radius: 0 8px 8px 0;
+    }
+
+td, th {
+    border: none;
+    color: #333333;
+    font-size: 0.8em;
+    padding: 0.4em 0.75em;
+}
+
+th {
+    font-weight: bold;
+    text-align: left;
+}
+
+
+.center {
+    text-align: center;
+}
+
+.right {
+    text-align: right;
+}

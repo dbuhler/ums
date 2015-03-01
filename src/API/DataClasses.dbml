@@ -1,0 +1,164 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="UNION" Class="DataClassesDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" SettingsObjectName="API.Properties.Settings" SettingsPropertyName="UNIONConnectionString1" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.ChangeLog" Member="ChangeLogs">
+    <Type Name="ChangeLog">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Time" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="[Table]" Member="Table" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="RecordID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Field" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="OldValue" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="NewValue" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="[User]" Member="User" Type="System.String" DbType="NVarChar(200) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PlanMember" Member="PlanMembers">
+    <Type Name="PlanMember">
+      <Column Name="MemberID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="PlanID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="StatusID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="EffectiveDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Association Name="PlanMember_Contribution" Member="Contributions" ThisKey="MemberID,PlanID" OtherKey="MemberID,PlanID" Type="Contribution" />
+      <Association Name="Member_PlanMember" Member="Member" ThisKey="MemberID" OtherKey="ID" Type="Member" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="MemberStatus_PlanMember" Member="MemberStatus" ThisKey="StatusID" OtherKey="ID" Type="MemberStatus" IsForeignKey="true" />
+      <Association Name="Plan_PlanMember" Member="Plan" ThisKey="PlanID" OtherKey="ID" Type="Plan" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Contribution" Member="Contributions">
+    <Type Name="Contribution">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="MemberID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PlanID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="OrganizationID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="EntryDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="EffectiveDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="BatchID" Type="System.String" DbType="VarChar(12) NOT NULL" CanBeNull="false" />
+      <Column Name="Units" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Rate" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="PlanMember_Contribution" Member="PlanMember" ThisKey="MemberID,PlanID" OtherKey="MemberID,PlanID" Type="PlanMember" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="Organization_Contribution" Member="Organization" ThisKey="OrganizationID" OtherKey="ID" Type="Organization" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MaritalStatus" Member="MaritalStatus">
+    <Type Name="MaritalStatus">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Association Name="MaritalStatus_Person" Member="Persons" ThisKey="ID" OtherKey="MaritalStatusID" Type="Person" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Member" Member="Members">
+    <Type Name="Member">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="PersonID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TypeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="StandingID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="StatusID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="EffectiveDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="MemberNumber" Type="System.String" DbType="VarChar(12)" CanBeNull="true" />
+      <Association Name="Member_PlanMember" Member="PlanMembers" ThisKey="ID" OtherKey="MemberID" Type="PlanMember" />
+      <Association Name="MemberStanding_Member" Member="MemberStanding" ThisKey="StandingID" OtherKey="ID" Type="MemberStanding" IsForeignKey="true" />
+      <Association Name="MemberStatus_Member" Member="MemberStatus" ThisKey="StatusID" OtherKey="ID" Type="MemberStatus" IsForeignKey="true" />
+      <Association Name="MemberType_Member" Member="MemberType" ThisKey="TypeID" OtherKey="ID" Type="MemberType" IsForeignKey="true" />
+      <Association Name="Person_Member" Member="Person" ThisKey="PersonID" OtherKey="ID" Type="Person" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MemberStanding" Member="MemberStandings">
+    <Type Name="MemberStanding">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Association Name="MemberStanding_Member" Member="Members" ThisKey="ID" OtherKey="StandingID" Type="Member" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MemberStatus" Member="MemberStatus">
+    <Type Name="MemberStatus">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Association Name="MemberStatus_PlanMember" Member="PlanMembers" ThisKey="ID" OtherKey="StatusID" Type="PlanMember" />
+      <Association Name="MemberStatus_Member" Member="Members" ThisKey="ID" OtherKey="StatusID" Type="Member" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MemberType" Member="MemberTypes">
+    <Type Name="MemberType">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Association Name="MemberType_Member" Member="Members" ThisKey="ID" OtherKey="TypeID" Type="Member" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Organization" Member="Organizations">
+    <Type Name="Organization">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="ContactID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Organization_Contribution" Member="Contributions" ThisKey="ID" OtherKey="OrganizationID" Type="Contribution" />
+      <Association Name="Person_Organization" Member="Person" ThisKey="ContactID" OtherKey="ID" Type="Person" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Person" Member="Persons">
+    <Type Name="Person">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Title" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="FirstName" Type="System.String" DbType="NVarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="LastName" Type="System.String" DbType="NVarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="Initial" Type="System.Char" DbType="NChar(1)" CanBeNull="true" />
+      <Column Name="BirthDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="DeathDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Gender" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="Address" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="PostalCode" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="City" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="ProvinceState" Type="System.String" DbType="Char(2)" CanBeNull="true" />
+      <Column Name="Country" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="HomePhone" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="WorkPhone" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="CellPhone" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="Fax" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="Sin" Type="System.String" DbType="Char(9)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="MaritalStatusID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Comments" Type="System.String" DbType="VarChar(64)" CanBeNull="true" />
+      <Association Name="Person_Member" Member="Members" ThisKey="ID" OtherKey="PersonID" Type="Member" />
+      <Association Name="Person_Organization" Member="Organizations" ThisKey="ID" OtherKey="ContactID" Type="Organization" />
+      <Association Name="MaritalStatus_Person" Member="MaritalStatus" ThisKey="MaritalStatusID" OtherKey="ID" Type="MaritalStatus" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.[Plan]" Member="Plans">
+    <Type Name="Plan">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="StandardContributionRate" Type="System.Decimal" DbType="Decimal(6,4) NOT NULL" CanBeNull="false" />
+      <Column Name="BusinessNumber" Type="System.String" DbType="Char(15) NOT NULL" CanBeNull="false" />
+      <Association Name="Plan_PlanMember" Member="PlanMembers" ThisKey="ID" OtherKey="PlanID" Type="PlanMember" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MemberPerson" Member="MemberPersons">
+    <Type Name="MemberPerson">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PersonID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TypeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="StandingID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="StatusID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="EffectiveDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="MemberNumber" Type="System.String" DbType="VarChar(12)" CanBeNull="true" />
+      <Column Name="Title" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="FirstName" Type="System.String" DbType="NVarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="LastName" Type="System.String" DbType="NVarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="Initial" Type="System.Char" DbType="NChar(1)" CanBeNull="true" />
+      <Column Name="BirthDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="DeathDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Gender" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="Address" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="PostalCode" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="City" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="ProvinceState" Type="System.String" DbType="Char(2)" CanBeNull="true" />
+      <Column Name="Country" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="HomePhone" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="WorkPhone" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="CellPhone" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="Fax" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="Sin" Type="System.String" DbType="Char(9)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="MaritalStatusID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Comments" Type="System.String" DbType="VarChar(64)" CanBeNull="true" />
+    </Type>
+  </Table>
+</Database>

@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" >
+  <siteMapNode url="~/" title="API Demo Interface">
+    <siteMapNode title="Persons">
+      <siteMapNode url="~/Persons/Show.aspx" title="Show All" />
+      <siteMapNode url="~/Persons/Find.aspx" title="Find Person" />
+      <siteMapNode url="~/Persons/Add.aspx"  title="Add Person" />
+    </siteMapNode>
+    <siteMapNode title="Members">
+      <siteMapNode url="~/Members/Show.aspx" title="Show All" />
+      <siteMapNode url="~/Members/Find.aspx" title="Find Member" />
+      <siteMapNode url="~/Members/Add.aspx"  title="Add Member" />
+    </siteMapNode>
+    <siteMapNode title="Change Log">
+      <siteMapNode url="~/Log/View.aspx" title="View Log" />
+      <siteMapNode url="~/Log/Clear.aspx" title="Clear Log" />
+    </siteMapNode>
+  </siteMapNode>
+</siteMap>

@@ -1,0 +1,29 @@
+﻿html, body {
+    height: 100%;
+}
+
+html {
+    overflow-y: scroll;
+}
+
+body {
+    background: #ddddff;
+    font-family: "Trebuchet MS", Arial, sans-serif;
+}
+
+#container {
+    width: 800px;
+    min-height: 100%;
+    margin: 0 auto;
+    background: #ffffff;
+}
+
+#form1 {
+    min-height: 200px;
+    overflow: auto;
+	padding-bottom: 2em;
+}
+
+a:hover {
+    text-decoration: underline;
+}
